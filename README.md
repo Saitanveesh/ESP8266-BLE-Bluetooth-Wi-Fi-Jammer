@@ -2,7 +2,7 @@
 
 This project aims to develop a jammer using ESP8266 to interfere with BLE and Wi-Fi networks. The project utilizes the RF24 library to generate interference in the 2.4 GHz bands and provides user feedback via an OLED display.
 
-## 📌 Requirements
+##  Requirements
 
 - **NodeMCU ESP8266** (or a compatible ESP8266-based board)
 - **NRF24L01+** module
@@ -10,7 +10,7 @@ This project aims to develop a jammer using ESP8266 to interfere with BLE and Wi
 - **Push Button** (to switch modes)
 - **Connecting wires**
 
-## 🛠 Required Libraries
+##  Required Libraries
 
 The following libraries must be installed in Arduino IDE:
 
@@ -20,7 +20,7 @@ The following libraries must be installed in Arduino IDE:
 - [Adafruit GFX](https://github.com/adafruit/Adafruit-GFX-Library)
 - [Adafruit SSD1306](https://github.com/adafruit/Adafruit_SSD1306)
 
-## ⚡ Hardware Connections
+##  Hardware Connections
 
 | ESP8266 Pin | NRF24L01+ Pin | Description |
 |------------|---------------|-------------|
@@ -43,14 +43,14 @@ The following libraries must be installed in Arduino IDE:
 |------------|---------|-------------|
 | RX (GPIO3) | Button  | User input button (Another PIN Button to GND) |
 
-## 🚀 Setup & Execution
+## Setup & Execution
 
 1. **Make the connections**: Complete the hardware setup as per the table above.
 2. **Install libraries**: Use **Library Manager** in Arduino IDE to install the required libraries.
 3. **Upload the code**: Open `jammer.ino` in Arduino IDE and upload it to your ESP8266 board.
 4. **Power up the device**: Connect your ESP8266 to a power source. The OLED screen will display jammer information.
 
-## 📡 Usage
+##  Usage
 
 When powered on, the device starts in **"Waiting Idly :("** mode by default.
 Press the button to switch between the following modes:
