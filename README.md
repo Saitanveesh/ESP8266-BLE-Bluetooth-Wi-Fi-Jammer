@@ -1,70 +1,59 @@
-# ESP8266 BLE(Bluetooth) & Wi-Fi Jammer
+# ESP8266 / nRF24L01+ 2.4 GHz Interference Prototype
 
-This project aims to develop a jammer using ESP8266 to interfere with BLE and Wi-Fi networks. The project utilizes the RF24 library to generate interference in the 2.4 GHz bands and provides user feedback via an OLED display.
+**Historical source for an experimental wireless-interference project.** This repository contains a single ESP8266-oriented source file using an nRF24L01+ 2.4 GHz transceiver, an SSD1306 OLED, and a push-button interface.
 
-##  Requirements
+**Status:** Source review only · Build incomplete · Hardware and RF behaviour unverified
 
-- **NodeMCU ESP8266** (or a compatible ESP8266-based board)
-- **NRF24L01+** module
-- **0.96" OLED SSD1306** display
-- **Push Button** (to switch modes)
-- **Connecting wires**
+> **Safety:** This project concerns intentional RF interference. Do not operate it on live or shared wireless networks. RF transmission may disrupt nearby devices and services and may be restricted or unlawful. Use only properly authorised, shielded laboratory arrangements, and assess electrical and thermal hazards before powering hardware.
 
-##  Required Libraries
+## What the repository contains
 
-The following libraries must be installed in Arduino IDE:
+| Component | Role in the source |
+| --- | --- |
+| ESP8266-based NodeMCU | Host microcontroller |
+| nRF24L01+ | External 2.4 GHz radio; the code requests a constant-carrier mode |
+| SSD1306 OLED | Local mode/status display |
+| Push button | Switches between menu states |
+| Arduino libraries | RF24, SPI, Wire, ezButton, Adafruit GFX, Adafruit SSD1306 |
 
-- [RF24](https://github.com/nRF24/RF24)
-- [SPI](https://github.com/espressif/arduino-esp32/tree/master/libraries%2FSPI)
-- [ezButton](https://github.com/ArduinoGetStarted/button)
-- [Adafruit GFX](https://github.com/adafruit/Adafruit-GFX-Library)
-- [Adafruit SSD1306](https://github.com/adafruit/Adafruit_SSD1306)
+**Important distinction:** The ESP8266 has Wi-Fi but no native Bluetooth or BLE radio. The nRF24L01+ is not a BLE controller. The mode names in the source should not be interpreted as proof of BLE implementation, Bluetooth protocol interaction, or selective Wi-Fi interference.
 
-##  Hardware Connections
+## Project status and limitations
 
-| ESP8266 Pin | NRF24L01+ Pin | Description |
-|------------|---------------|-------------|
-| D2 (GPIO4) | CSN            | Chip Select |
-| D4 (GPIO2) | CE           | Module enable |
-| D5 (GPIO14)| SCK           | Serial clock signal |
-| D7 (GPIO13)| MOSI          | Data output |
-| D6 (GPIO12)| MISO          | Data input |
-| 3.3V       | VCC           | Power supply |
-| GND        | GND           | Ground |
+This is **not a verified, ready-to-build release**.
 
-| ESP8266 Pin | OLED Pin | Description |
-|------------|---------|-------------|
-| D5 (GPIO14)| SDA     | Serial data line |
-| D6 (GPIO12)| SCL     | Serial clock line |
-| 3.3V       | VCC     | Power supply |
-| GND        | GND     | Ground |
+- The only source file currently published is `CODE-1`, not the `jammer.ino` named by the previous README.
+- `CODE-1` includes `images.h`, which is not in the repository. Bitmap symbols referenced by the source are consequently unresolved as published.
+- The previous wiring table assigned pins to both the OLED interface and the radio SPI interface. Connections and pin choices require a new schematic-level review.
+- A code inspection does not establish real-world transmission characteristics, affected protocols, performance, reliability, or regulatory compliance.
+- The source has not been modified or tested as part of the documentation refresh.
 
-| ESP8266 Pin | Button Pin | Description |
-|------------|---------|-------------|
-| RX (GPIO3) | Button  | User input button (Another PIN Button to GND) |
+See [Technical review](docs/TECHNICAL_REVIEW.md) for findings and the evidence needed before treating the project as a reproducible research prototype.
 
-## Setup & Execution
+## Suggested research direction
 
-1. **Make the connections**: Complete the hardware setup as per the table above.
-2. **Install libraries**: Use **Library Manager** in Arduino IDE to install the required libraries.
-3. **Upload the code**: Open `jammer.ino` in Arduino IDE and upload it to your ESP8266 board.
-4. **Power up the device**: Connect your ESP8266 to a power source. The OLED screen will display jammer information.
+For controlled wireless-security education, a safer and more reproducible next iteration would focus on **passive spectrum observation, interference detection, coexistence measurements, and offline simulations**, with documented test conditions and quantitative results. These can be studied without deliberately disrupting third-party networks.
 
-##  Usage
+## Repository layout
 
-When powered on, the device starts in **"Waiting Idly :("** mode by default.
-Press the button to switch between the following modes:
+```text
+.
+├── CODE-1                  # Original source; retained unchanged
+├── README.md               # Project overview and current limitations
+├── docs/
+│   └── TECHNICAL_REVIEW.md # Code and hardware documentation audit
+├── SECURITY.md             # Responsible-use and disclosure guidance
+└── NOTICE.md               # Attribution and licensing status
+```
 
-1. **BLE(Bluetooth) & All 2.4 GHz** (Interferes with all Bluetooth, 2.4 GHz devices)
-2. **Just Wi-Fi** (Interferes only with Wi-Fi networks)
-3. **Waiting Idly :(** (Puts the device in standby mode)
+## Maintainer
 
-The current mode will be displayed on the OLED screen.
+**Sai Tanveesh**
 
-**Note:** You can connect external power like small lipo batteries.
+[GitHub](https://github.com/Saitanveesh) · [LinkedIn](https://www.linkedin.com/in/sai-tanveesh-028881215/)
 
-**Warning:** The nRF24l01 module getting extremely hot during use. This does not affect operation probably. But it may overheat your hand :D.
+## Licensing and attribution
 
-This project is for **educational purposes only** and unauthorized usage is **illegal**. Please check your country's laws and adhere to ethical guidelines.
+No explicit open-source license is provided at present. Public access to the repository is **not** equivalent to permission to reuse, redistribute, or commercially exploit the work. Third-party code and image provenance must be reviewed before any license is selected or an original-authorship claim is made. See [NOTICE.md](NOTICE.md).
 
-------
+This repository is for documentation and research discussion only; it is not a product endorsement or an instruction to deploy an interference device.
