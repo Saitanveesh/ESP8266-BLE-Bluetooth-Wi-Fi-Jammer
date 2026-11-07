@@ -1,5 +1,9 @@
 # ESP8266 / nRF24L01+ 2.4 GHz Interference Prototype
 
+![ESP8266 and nRF24L01+ 2.4 GHz research prototype: component overview and source-review status](docs/brand/esp8266-rf-prototype-banner.jpg)
+
+*Illustrative project artwork. It is not a verified wiring diagram, RF measurement, or evidence of interference performance.*
+
 **Historical source for an experimental wireless-interference project.** This repository contains a single ESP8266-oriented source file using an nRF24L01+ 2.4 GHz transceiver, an SSD1306 OLED, and a push-button interface.
 
 **Status:** Source review only · Build incomplete · Hardware and RF behaviour unverified
